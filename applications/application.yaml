@@ -10,6 +10,9 @@ metadata:
 
     argocd-image-updater.argoproj.io/sample-app.update-strategy: newest-build
 
+    argocd-image-updater.argoproj.io/sample-app.allow-tags: regexp:^[0-9]+$
+
+
     argocd-image-updater.argoproj.io/write-back-method: git
 
     argocd-image-updater.argoproj.io/sample-app.force-update: "true"
