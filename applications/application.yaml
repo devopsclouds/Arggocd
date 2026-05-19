@@ -6,7 +6,7 @@ metadata:
   namespace: argocd
 
   annotations:
-    argocd-image-updater.argoproj.io/image-list: sample-app=docker.io/docker89781/sample-app
+    argocd-image-updater.argoproj.io/image-list: sample-app=docker89781/sample-app
 
     argocd-image-updater.argoproj.io/sample-app.update-strategy: newest-build
 
