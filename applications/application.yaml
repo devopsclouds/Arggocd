@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: sample-app
+  namespace: argocd
+
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: sample-app=docker.io/docker89781/sampleapp
+
+    argocd-image-updater.argoproj.io/sample-app.update-strategy: newest-build
+
+    argocd-image-updater.argoproj.io/write-back-method: git
+
+    argocd-image-updater.argoproj.io/sample-app.force-update: "true"
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/devopsclouds/k8-manifests.git
+    targetRevision: main
+    path: sampleapp
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true
