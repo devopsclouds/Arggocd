@@ -7,16 +7,20 @@ metadata:
 
   annotations:
     argocd-image-updater.argoproj.io/image-list: app=docker89781/sample-app
-
-    argocd-image-updater.argoproj.io/app.update-strategy: newest-build
-
-    argocd-image-updater.argoproj.io/app.allow-tags: regexp:^[0-9]+$
-
-    argocd-image-updater.argoproj.io/app.helm.image-name: image.repository
-
-    argocd-image-updater.argoproj.io/app.helm.image-tag: image.tag
-
+    
+    # 2. Chronological Strategy for Build Numbers
+    argocd-image-updater.argoproj.io/myapp.update-strategy: latest
+    
+    # 3. Match Pattern (e.g., build-1, build-204, build-1049)
+    argocd-image-updater.argoproj.io/myapp.allow-tags: regexp:^build-\d+$
+    
+    # 4. Bind to your Helm values keys
+    argocd-image-updater.argoproj.io/myapp.helm.image-name: image.repository
+    argocd-image-updater.argoproj.io/myapp.helm.image-tag: image.tag
+    
+    # 5. Git Write-Back Configuration
     argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/git-branch: main #
 
 spec:
   project: default
